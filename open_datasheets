@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+open ./datasheets/DSPI\ Programmer\'s\ Reference\ Manual.pdf
+open ./datasheets/Micron-N25Q128A13BSE40F-datasheet.pdf 

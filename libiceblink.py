@@ -52,7 +52,7 @@ class M25P10(object):
     def read(self, addr, size):
         return self.io([self.CMD_FAST_READ, (addr>>16) & 0xFF, (addr>>8)&0xFF, addr &
                         0xFF, 0x00], size+5)[5:]
-    def pageProgram(self, addr, buf):
+    def pageProgram(self, addr, buf): #page
         self.setWritable()
         assert len(buf) <= 256
         assert addr & 0xFF == 0
@@ -70,7 +70,6 @@ class M25P10(object):
 
     def getID(self):
         return self.io([self.CMD_READ_ID],4)[1:]
-
 
 class ICE40Board(object):
 
@@ -206,7 +205,7 @@ class ICE40Board(object):
             if self.__is_open:
                 self.close()
 
-        def io(self, write_bytes, read_byte_count=0):
+        def io(self, write_bytes, read_byte_count=0): #io
             assert self.__is_open
             write_bytes = list(write_bytes)
 
@@ -358,7 +357,7 @@ class ICE40Board(object):
                                               status,
                                                    binascii.hexlify(res[1:]).decode('ascii')))
         return status, res[1:]
-    def cmd_i(self, cmd_bytes, result_size, show=False):
+    def cmd_i(self, cmd_bytes, result_size, show=False): #cmdi
         print(len(cmd_bytes))
         print(cmd_bytes)
         payload = struct.pack('<B', len(cmd_bytes)) + bytes(cmd_bytes)
